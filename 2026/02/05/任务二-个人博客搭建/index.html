@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>任务二：个人博客的搭建 | Hexo</title><meta name="author" content="Eason.Zhao"><meta name="copyright" content="Eason.Zhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content=".task-card {   background: rgba(255,255,255,0.95);   border-radius: 16px;   padding: 24px;   margin: 24px 0;   box-shadow: 0 8px 24px rgba(0,0,0,.1); }  .task-title {   font-size: 26px;   font-weigh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="任务二：个人博客的搭建">
+<meta property="og:url" content="http://example.com/2026/02/05/%E4%BB%BB%E5%8A%A1%E4%BA%8C-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content=".task-card {   background: rgba(255,255,255,0.95);   border-radius: 16px;   padding: 24px;   margin: 24px 0;   box-shadow: 0 8px 24px rgba(0,0,0,.1); }  .task-title {   font-size: 26px;   font-weigh">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2026-02-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-05T13:02:21.982Z">
+<meta property="article:author" content="Eason.Zhao">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Butterfly">
+<meta property="article:tag" content="GitHub Pages">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "任务二：个人博客的搭建",
+  "url": "http://example.com/2026/02/05/%E4%BB%BB%E5%8A%A1%E4%BA%8C-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/",
+  "image": "http://example.com/img/avatar.jpg",
+  "datePublished": "2026-02-04T16:00:00.000Z",
+  "dateModified": "2026-02-05T13:02:21.982Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Eason.Zhao",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/02/05/%E4%BB%BB%E5%8A%A1%E4%BA%8C-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '任务二：个人博客的搭建',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">任务二：个人博客的搭建</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">任务二：个人博客的搭建</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-04T16:00:00.000Z" title="Created 2026-02-05 00:00:00">2026-02-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-05T13:02:21.982Z" title="Updated 2026-02-05 21:02:21">2026-02-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E7%A8%8B%E4%BB%BB%E5%8A%A1/">课程任务</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><!-- 页面样式 -->
+<style>
+.task-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,.1);
+}
+
+.task-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.task-step {
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  margin: 18px 0 10px;
+  font-weight: bold;
+}
+
+.task-tip {
+  background: #f6f8fa;
+  border-left: 5px solid #667eea;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+
+.cmd {
+  background: #0d1117;
+  color: #58a6ff;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: Consolas, monospace;
+  margin: 10px 0;
+  overflow-x: auto;
+}
+</style>
+
+<script>
+function finishTask() {
+  alert("🎉 博客已成功部署到 GitHub Pages！");
+}
+</script>
+
+<div class="task-card">
+  <div class="task-title">📌 任务二：个人博客的搭建</div>
+  本文记录了使用 Hexo 框架搭建个人博客，并将其部署到 GitHub Pages 的完整流程。
+</div>
+
+<hr>
+<h2 id="一、任务背景"><a href="#一、任务背景" class="headerlink" title="一、任务背景"></a>一、任务背景</h2><div class="task-card">
+本次任务要求使用 Hexo 框架搭建个人博客系统，
+选择合适的主题对博客进行配置，
+并通过 GitHub Pages 实现博客的在线访问。
+</div>
+
+<hr>
+<h2 id="二、环境准备"><a href="#二、环境准备" class="headerlink" title="二、环境准备"></a>二、环境准备</h2><div class="task-card">
+在正式搭建博客前，需要准备以下开发环境：
+
+<ul>
+<li>操作系统：Windows  </li>
+<li>Node.js（用于运行 Hexo）  </li>
+<li>Git（用于代码管理与部署）  </li>
+<li>GitHub 账号（用于博客托管）</div></li>
+</ul>
+<hr>
+<h2 id="三、Hexo-博客初始化"><a href="#三、Hexo-博客初始化" class="headerlink" title="三、Hexo 博客初始化"></a>三、Hexo 博客初始化</h2><div class="task-step">Step 1：安装 Hexo</div>
+
+<div class="cmd">
+npm install -g hexo-cli
+</div>
+
+<div class="task-step">Step 2：初始化博客项目</div>
+
+<div class="cmd">
+hexo init myblog  
+cd myblog  
+npm install
+</div>
+
+<div class="task-step">Step 3：本地启动博客</div>
+
+<div class="cmd">
+hexo s
+</div>
+
+<div class="task-tip">
+在浏览器中访问：http://localhost:4000  
+若能成功访问页面，说明博客初始化完成。
+</div>
+
+<hr>
+<h2 id="四、Butterfly-主题配置"><a href="#四、Butterfly-主题配置" class="headerlink" title="四、Butterfly 主题配置"></a>四、Butterfly 主题配置</h2><div class="task-card">
+为了提升博客的整体美观度和用户体验，
+本次博客选用了 Hexo 中较为流行的 Butterfly 主题。
+</div>
+
+<div class="task-step">Step 1：下载主题</div>
+
+<div class="cmd">
+git clone https://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly
+</div>
+
+<div class="task-step">Step 2：启用主题</div>
+
+<div class="task-card">
+在站点根目录下修改 <code>_config.yml</code> 文件：
+</div>
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">butterfly</span></span><br></pre></td></tr></table></figure>
+<h2 id="五、部署到-GitHub-Pages"><a href="#五、部署到-GitHub-Pages" class="headerlink" title="五、部署到 GitHub Pages"></a>五、部署到 GitHub Pages</h2><div class="task-step">
+Step 1：安装部署插件
+</div>
+
+<div class="cmd">
+npm install hexo-deployer-git --save
+</div>
+
+<div class="task-step">
+Step 2：配置 GitHub 仓库信息
+</div>
+
+<div class="task-card">
+在站点配置文件 <code>_config.yml</code> 中添加以下内容：
+</div>
+
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的GitHub用户名/你的仓库名.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+<div class="task-step">
+Step 3：生成并部署博客
+</div>
+
+<div class="cmd">
+hexo clean
+hexo g
+hexo d
+</div>
+
+<button onclick="finishTask()" style="padding:10px 18px;border-radius:8px;border:none;background:#667eea;color:#fff;cursor:pointer;">
+确认部署完成
+</button>
+
+<hr>
+<h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h2><div class="task-card">
+通过本次任务，我成功掌握了 Hexo 博客的基本搭建流程，
+了解了主题配置与博客部署的方法，
+并实现了通过 GitHub Pages 在线访问个人博客。
+该博客平台也为后续技术学习与内容分享提供了良好的基础。
+</div>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Eason.Zhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/02/05/%E4%BB%BB%E5%8A%A1%E4%BA%8C-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">http://example.com/2026/02/05/%E4%BB%BB%E5%8A%A1%E4%BA%8C-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/Butterfly/">Butterfly</a><a class="post-meta__tags" href="/tags/GitHub-Pages/">GitHub Pages</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/01/23/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Eason.Zhao</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%BB%E5%8A%A1%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">一、任务背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">二、环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Hexo-%E5%8D%9A%E5%AE%A2%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">三、Hexo 博客初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Butterfly-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">四、Butterfly 主题配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%83%A8%E7%BD%B2%E5%88%B0-GitHub-Pages"><span class="toc-number">5.</span> <span class="toc-text">五、部署到 GitHub Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">六、总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/05/%E4%BB%BB%E5%8A%A1%E4%BA%8C-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="任务二：个人博客的搭建">任务二：个人博客的搭建</a><time datetime="2026-02-04T16:00:00.000Z" title="Created 2026-02-05 00:00:00">2026-02-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/hello-world/" title="Hello World">Hello World</a><time datetime="2026-01-23T15:23:40.440Z" title="Created 2026-01-23 23:23:40">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E5%9F%BA%E4%BA%8EYOLOv11%E7%9A%84%E7%94%B5%E5%AD%90%E8%AE%BE%E5%A4%87%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B-1/" title="任务一：基于YOLOv11的电子设备目标检测">任务一：基于YOLOv11的电子设备目标检测</a><time datetime="2026-01-22T16:00:00.000Z" title="Created 2026-01-23 00:00:00">2026-01-23</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Eason.Zhao</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
