@@ -1,0 +1,848 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C++ 数据结构与算法笔记 | Hexo</title><meta name="author" content="Eason.Zhao"><meta name="copyright" content="Eason.Zhao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="&#x2F;* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 全局基础样式（解决核心布局问题） &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; *&#x2F; * {     margin:0;     padding:0;     box-sizing:border-box;     font-family:&#39;Microsoft YaHei&#39;,&#39;Consolas&#39;,monospace,sans-serif; } body {     padding-right:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 数据结构与算法笔记">
+<meta property="og:url" content="http://example.com/2026/02/06/%E4%BB%BB%E5%8A%A1%E4%B8%89-C++%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="&#x2F;* &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 全局基础样式（解决核心布局问题） &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; *&#x2F; * {     margin:0;     padding:0;     box-sizing:border-box;     font-family:&#39;Microsoft YaHei&#39;,&#39;Consolas&#39;,monospace,sans-serif; } body {     padding-right:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2026-02-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-23T12:45:40.365Z">
+<meta property="article:author" content="Eason.Zhao">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="STL">
+<meta property="article:tag" content="排序">
+<meta property="article:tag" content="动态规划">
+<meta property="article:tag" content="图算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C++ 数据结构与算法笔记",
+  "url": "http://example.com/2026/02/06/%E4%BB%BB%E5%8A%A1%E4%B8%89-C++%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/",
+  "image": "http://example.com/img/avatar.jpg",
+  "datePublished": "2026-02-05T16:00:00.000Z",
+  "dateModified": "2026-02-23T12:45:40.365Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Eason.Zhao",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/02/06/%E4%BB%BB%E5%8A%A1%E4%B8%89-C++%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C++ 数据结构与算法笔记',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">C++ 数据结构与算法笔记</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">C++ 数据结构与算法笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-02-05T16:00:00.000Z" title="Created 2026-02-06 00:00:00">2026-02-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-02-23T12:45:40.365Z" title="Updated 2026-02-23 20:45:40">2026-02-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AF%BE%E7%A8%8B%E4%BB%BB%E5%8A%A1/">课程任务</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><style>
+/* ========== 全局基础样式（解决核心布局问题） ========== */
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Microsoft YaHei','Consolas',monospace,sans-serif;
+}
+body {
+    padding-right:320px!important;
+    overflow-x:hidden;
+    background:#f5f8fa;
+}
+.hexo-post {
+    max-width:1000px!important;
+    width:calc(100% - 340px)!important;
+    margin:20px auto 20px 20px!important;
+    background:#ffffff;
+    border-radius:12px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.05);
+    padding:35px;
+    border:1px solid #e8eff4;
+    position:relative;
+    z-index:1;
+}
+.sidebar-widget {
+    position:fixed!important;
+    right:20px!important;
+    top:20px!important;
+    width:280px!important;
+    z-index:10!important;
+    background:white!important;
+    border-radius:8px;
+    box-shadow:0 2px 15px rgba(0,0,0,0.1);
+    padding:18px!important;
+}
+/* ========== 标题样式（层级清晰） ========== */
+h1 {
+    font-size:28px;
+    color:#082943;
+    border-bottom:3px solid #3a6ea5;
+    padding-bottom:10px;
+    margin:0 0 30px 0;
+    font-weight:700;
+}
+h2 {
+    font-size:24px;
+    color:#0b263b;
+    border-bottom:2px solid #c9d9e9;
+    padding-bottom:8px;
+    margin:35px 0 18px 0;
+    clear:both;
+}
+h3 {
+    font-size:20px;
+    color:#1e4974;
+    border-bottom:1px dashed #b8cbd9;
+    padding-bottom:6px;
+    margin:25px 0 15px 0;
+}
+h4 {
+    font-size:16px;
+    color:#274b6b;
+    margin:20px 0 12px 0;
+    font-weight:600;
+}
+.tag-badge {
+    display:inline-block;
+    background:#eef3f7;
+    color:#1e4974;
+    border-radius:20px;
+    font-size:12px;
+    padding:3px 10px;
+    margin-left:8px;
+    vertical-align:middle;
+}
+/* ========== 代码块核心样式（解决溢出/排版问题） ========== */
+.code-block {
+    width:100%;
+    margin:15px 0 25px 0!important;
+    float:none!important;
+    clear:both;
+    background:#1e2b3a;
+    border-radius:8px;
+    overflow-x:auto;
+    padding:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+.code-block pre,.code-block code {
+    background:transparent!important;
+    color:#e7f0f9!important;
+    font-family:'Consolas','Fira Code','Cascadia Code',monospace!important;
+    font-size:14px!important;
+    line-height:1.7!important;
+    white-space:pre!important;
+    word-wrap:normal!important;
+    border:none!important;
+}
+code:not(.code-block code) {
+    background:#e7edf5;
+    color:#1e4974;
+    padding:2px 6px;
+    border-radius:4px;
+    font-size:13px;
+    font-weight:500;
+}
+/* ========== 模块容器（避免内容重叠） ========== */
+.module-item {
+    width:100%;
+    margin:20px 0;
+    padding:20px;
+    background:#f8fafc;
+    border-radius:8px;
+    border-left:4px solid #3a6ea5;
+    clear:both;
+}
+.complexity {
+    color:#1e4974;
+    font-style:italic;
+    margin:-10px 0 15px 10px;
+    padding-left:8px;
+    border-left:3px solid #cedcea;
+    font-size:13px;
+}
+/* ========== 移动端适配（全设备兼容） ========== */
+@media (max-width:1200px) {
+    body {
+        padding-right:0!important;
+    }
+    .hexo-post {
+        width:95%!important;
+        margin:20px auto!important;
+        padding:20px;
+    }
+    .sidebar-widget {
+        position:static!important;
+        width:95%!important;
+        margin:20px auto!important;
+    }
+    .code-block {
+        padding:15px;
+        font-size:13px!important;
+    }
+    h1 {font-size:24px;}
+    h2 {font-size:20px;}
+    h3 {font-size:18px;}
+}
+</style>
+
+<div class="hexo-post">
+    <h1>📚 C++ 数据结构与算法完整笔记</h1>
+    <h2>一、STL容器</h2>
+    <h3>1. 序列式容器（线性结构）</h3>
+    <div class="module-item">
+        <h4>vector（动态数组） <span class="tag-badge">连续存储 | 随机访问O(1) | 自动扩容</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+int main() {
+    vector&lt;int&gt; v1;
+    vector&lt;int&gt; v2(5,10);
+    vector&lt;int&gt; v3(v2.begin(),v2.end());
+    vector&lt;int&gt; v4={1,2,3,4,5};
+    v4.push_back(6);
+    v4.pop_back();
+    v4.insert(v4.begin()+2,9);
+    v4.erase(v4.begin()+2);
+    v4.resize(8,0);
+    v4.clear();
+    for(int i=0;i&lt;v2.size();i++) cout&lt;&lt;v2[i]&lt;&lt;" ";
+    for(auto it=v2.begin();it!=v2.end();it++) cout&lt;&lt;*it&lt;&lt;" ";
+    for(int num:v2) cout&lt;&lt;num&lt;&lt;" ";
+    cout&lt;&lt;"大小: "&lt;&lt;v2.size()&lt;&lt;endl;
+    cout&lt;&lt;"容量: "&lt;&lt;v2.capacity()&lt;&lt;endl;
+    cout&lt;&lt;"是否为空: "&lt;&lt;v2.empty()&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <div class="module-item">
+        <h4>list（双向链表） <span class="tag-badge">非连续存储 | 双向遍历 | 头尾增删O(1)</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;list&gt;
+using namespace std;
+int main() {
+    list&lt;int&gt; l1;
+    list&lt;int&gt; l2(5,10);
+    list&lt;int&gt; l3={1,2,3,4,5};
+    l3.push_front(0);
+    l3.push_back(6);
+    l3.pop_front();
+    l3.pop_back();
+    auto it=l3.begin();
+    advance(it,2);
+    l3.insert(it,9);
+    l3.erase(it);
+    l3.reverse();
+    l3.sort();
+    for(auto it=l3.begin();it!=l3.end();it++) cout&lt;&lt;*it&lt;&lt;" ";
+    for(int num:l3) cout&lt;&lt;num&lt;&lt;" ";
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <div class="module-item">
+        <h4>stack/queue/deque <span class="tag-badge">栈：后进先出 | 队列：先进先出 | 双端队列：头尾高效</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;stack&gt;
+#include &lt;queue&gt;
+#include &lt;deque&gt;
+using namespace std;
+int main() {
+    stack&lt;int&gt; st;
+    st.push(1);st.push(2);st.push(3);
+    cout&lt;&lt;"栈顶: "&lt;&lt;st.top()&lt;&lt;endl;
+    st.pop();
+    queue&lt;int&gt; q;
+    q.push(1);q.push(2);q.push(3);
+    cout&lt;&lt;"队首: "&lt;&lt;q.front()&lt;&lt;endl;
+    cout&lt;&lt;"队尾: "&lt;&lt;q.back()&lt;&lt;endl;
+    q.pop();
+    deque&lt;int&gt; dq={1,2,3,4,5};
+    dq.push_front(0);
+    dq.push_back(6);
+    dq.pop_front();
+    dq.pop_back();
+    cout&lt;&lt;dq[2]&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <h3>2. 关联式容器（非线性结构）</h3>
+    <div class="module-item">
+        <h4>set/map（红黑树） <span class="tag-badge">自动排序 | 增删查O(log n) | 键唯一</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+using namespace std;
+int main() {
+    set&lt;int&gt; s={3,1,4,1,5};
+    s.insert(2);
+    s.erase(1);
+    auto it1=s.find(3);
+    map&lt;string,int&gt; mp;
+    mp["apple"]=5;
+    mp.insert(make_pair("banana",3));
+    cout&lt;&lt;mp["apple"]&lt;&lt;endl;
+    for(auto num:s) cout&lt;&lt;num&lt;&lt;" ";
+    for(auto p:mp) cout&lt;&lt;p.first&lt;&lt;":"&lt;&lt;p.second&lt;&lt;" ";
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <div class="module-item">
+        <h4>unordered_set/unordered_map（哈希表） <span class="tag-badge">无序 | 增删查O(1)平均 | 效率更高</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;unordered_set&gt;
+#include &lt;unordered_map&gt;
+using namespace std;
+int main() {
+    unordered_set&lt;int&gt; us={3,1,4,2};
+    us.insert(5);
+    us.erase(3);
+    unordered_map&lt;string,int&gt; ump;
+    ump["apple"]=5;
+    auto it=ump.find("apple");
+    if(it!=ump.end()) cout&lt;&lt;it-&gt;second&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <div class="module-item">
+        <h4>priority_queue（优先队列/堆） <span class="tag-badge">堆实现 | 默认大顶堆 | 顶元素访问O(1)</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+int main() {
+    priority_queue&lt;int&gt; maxHeap;
+    maxHeap.push(5);maxHeap.push(2);maxHeap.push(8);
+    cout&lt;&lt;"大顶堆顶: "&lt;&lt;maxHeap.top()&lt;&lt;endl;
+    priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt;&gt; minHeap;
+    minHeap.push(5);minHeap.push(2);minHeap.push(8);
+    cout&lt;&lt;"小顶堆顶: "&lt;&lt;minHeap.top()&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <h2>二、数据结构</h2>
+    <h3>1. 线性结构</h3>
+    <div class="module-item">
+        <h4>单链表 <span class="tag-badge">遍历/插入/删除 | 动态内存管理</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+using namespace std;
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x):val(x),next(nullptr){}
+};
+void traverse(ListNode* head) {
+    ListNode* curr=head;
+    while(curr) {
+        cout&lt;&lt;curr-&gt;val&lt;&lt;" ";
+        curr=curr-&gt;next;
+    }
+}
+void insertNode(ListNode*& head,int val) {
+    ListNode* newNode=new ListNode(val);
+    newNode-&gt;next=head-&gt;next;
+    head-&gt;next=newNode;
+}
+void deleteNode(ListNode*& head,int val) {
+    ListNode* curr=head;
+    while(curr-&gt;next&amp;&amp;curr-&gt;next-&gt;val!=val) curr=curr-&gt;next;
+    if(curr-&gt;next) {
+        ListNode* temp=curr-&gt;next;
+        curr-&gt;next=curr-&gt;next-&gt;next;
+        delete temp;
+    }
+}
+int main() {
+    ListNode* head=new ListNode(0);
+    insertNode(head,1);
+    insertNode(head,2);
+    traverse(head-&gt;next);
+    deleteNode(head,1);
+    traverse(head-&gt;next);
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <div class="module-item">
+        <h4>栈/队列（数组实现） <span class="tag-badge">栈：后进先出 | 队列：循环数组避免假溢出</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+using namespace std;
+const int MAX_SIZE=100;
+struct Stack {
+    int data[MAX_SIZE];
+    int top;
+    Stack():top(-1){}
+    bool push(int val) {
+        if(top==MAX_SIZE-1) return false;
+        data[++top]=val;
+        return true;
+    }
+    bool pop() {
+        if(top==-1) return false;
+        top--;
+        return true;
+    }
+    int topVal() {return data[top];}
+    bool empty() {return top==-1;}
+};
+struct Queue {
+    int data[MAX_SIZE];
+    int front,rear;
+    Queue():front(0),rear(0){}
+    bool push(int val) {
+        if((rear+1)%MAX_SIZE==front) return false;
+        data[rear]=val;
+        rear=(rear+1)%MAX_SIZE;
+        return true;
+    }
+    bool pop() {
+        if(front==rear) return false;
+        front=(front+1)%MAX_SIZE;
+        return true;
+    }
+    int frontVal() {return data[front];}
+    bool empty() {return front==rear;}
+};
+int main() {
+    Stack st;
+    st.push(1);st.push(2);
+    cout&lt;&lt;st.topVal()&lt;&lt;endl;
+    Queue q;
+    q.push(1);q.push(2);
+    cout&lt;&lt;q.frontVal()&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <h3>2. 非线性结构</h3>
+    <div class="module-item">
+        <h4>二叉搜索树 <span class="tag-badge">插入/查找/中序遍历 | 升序输出</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+using namespace std;
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x):val(x),left(nullptr),right(nullptr){}
+};
+TreeNode* insert(TreeNode* root,int val) {
+    if(!root) return new TreeNode(val);
+    if(val&lt;root-&gt;val) root-&gt;left=insert(root-&gt;left,val);
+    else root-&gt;right=insert(root-&gt;right,val);
+    return root;
+}
+bool search(TreeNode* root,int val) {
+    if(!root) return false;
+    if(val==root-&gt;val) return true;
+    return val&lt;root-&gt;val?search(root-&gt;left,val):search(root-&gt;right,val);
+}
+void inorder(TreeNode* root) {
+    if(root) {
+        inorder(root-&gt;left);
+        cout&lt;&lt;root-&gt;val&lt;&lt;" ";
+        inorder(root-&gt;right);
+    }
+}
+int main() {
+    TreeNode* root=nullptr;
+    root=insert(root,5);
+    insert(root,3);insert(root,7);insert(root,2);
+    inorder(root);
+    cout&lt;&lt;search(root,3)&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <div class="module-item">
+        <h4>堆 & 哈希表 <span class="tag-badge">堆排序 | 哈希表链地址法解决冲突</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+using namespace std;
+void heapify(vector&lt;int&gt;&amp; arr,int n,int i) {
+    int largest=i;
+    int left=2*i+1;
+    int right=2*i+2;
+    if(left&lt;n&amp;&amp;arr[left]&gt;arr[largest]) largest=left;
+    if(right&lt;n&amp;&amp;arr[right]&gt;arr[largest]) largest=right;
+    if(largest!=i) {
+        swap(arr[i],arr[largest]);
+        heapify(arr,n,largest);
+    }
+}
+void heapSort(vector&lt;int&gt;&amp; arr) {
+    int n=arr.size();
+    for(int i=n/2-1;i&gt;=0;i--) heapify(arr,n,i);
+    for(int i=n-1;i&gt;0;i--) {
+        swap(arr[0],arr[i]);
+        heapify(arr,i,0);
+    }
+}
+struct HashNode {
+    string key;
+    int val;
+    HashNode* next;
+    HashNode(string k,int v):key(k),val(v),next(nullptr){}
+};
+const int TABLE_SIZE=100;
+class HashTable {
+private:
+    vector&lt;HashNode*&gt; table;
+    int hashFunc(string key) {
+        int hash=0;
+        for(char c:key) hash=(hash*31+c)%TABLE_SIZE;
+        return hash;
+    }
+public:
+    HashTable():table(TABLE_SIZE,nullptr){}
+    void insert(string key,int val) {
+        int idx=hashFunc(key);
+        HashNode* newNode=new HashNode(key,val);
+        newNode-&gt;next=table[idx];
+        table[idx]=newNode;
+    }
+    int search(string key) {
+        int idx=hashFunc(key);
+        HashNode* curr=table[idx];
+        while(curr) {
+            if(curr-&gt;key==key) return curr-&gt;val;
+            curr=curr-&gt;next;
+        }
+        return -1;
+    }
+    void erase(string key) {
+        int idx=hashFunc(key);
+        HashNode* curr=table[idx];
+        HashNode* prev=nullptr;
+        while(curr&amp;&amp;curr-&gt;key!=key) {
+            prev=curr;
+            curr=curr-&gt;next;
+        }
+        if(!curr) return;
+        if(!prev) table[idx]=curr-&gt;next;
+        else prev-&gt;next=curr-&gt;next;
+        delete curr;
+    }
+};
+int main() {
+    vector&lt;int&gt; arr={4,10,3,5,1};
+    heapSort(arr);
+    for(int num:arr) cout&lt;&lt;num&lt;&lt;" ";
+    HashTable ht;
+    ht.insert("apple",5);
+    cout&lt;&lt;ht.search("apple")&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <h2>三、算法</h2>
+    <h3>1. 排序算法</h3>
+    <div class="module-item">
+        <h4>快速排序 <span class="tag-badge">分治 | 原地排序 | 效率高</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+int partition(vector&lt;int&gt;&amp; arr,int low,int high) {
+    int pivot=arr[high];
+    int i=low-1;
+    for(int j=low;j&lt;high;j++) {
+        if(arr[j]&lt;=pivot) swap(arr[++i],arr[j]);
+    }
+    swap(arr[i+1],arr[high]);
+    return i+1;
+}
+void quickSort(vector&lt;int&gt;&amp; arr,int low,int high) {
+    if(low&lt;high) {
+        int pi=partition(arr,low,high);
+        quickSort(arr,low,pi-1);
+        quickSort(arr,pi+1,high);
+    }
+}
+int main() {
+    vector&lt;int&gt; arr={64,34,25,12,22,11,90};
+    quickSort(arr,0,arr.size()-1);
+    for(int num:arr) cout&lt;&lt;num&lt;&lt;" ";
+    return 0;
+}</pre>
+        </div>
+        <p class="complexity">复杂度：平均O(n log n) | 最坏O(n²) | 不稳定 | 原地排序</p>
+    </div>
+    <div class="module-item">
+        <h4>归并排序 <span class="tag-badge">分治 | 稳定 | 非原地</span></h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+void merge(vector&lt;int&gt;&amp; arr,int low,int mid,int high) {
+    vector&lt;int&gt; temp(high-low+1);
+    int i=low,j=mid+1,k=0;
+    while(i&lt;=mid&amp;&amp;j&lt;=high) temp[k++]=arr[i]&lt;=arr[j]?arr[i++]:arr[j++];
+    while(i&lt;=mid) temp[k++]=arr[i++];
+    while(j&lt;=high) temp[k++]=arr[j++];
+    for(k=0;k&lt;temp.size();k++) arr[low+k]=temp[k];
+}
+void mergeSort(vector&lt;int&gt;&amp; arr,int low,int high) {
+    if(low&lt;high) {
+        int mid=low+(high-low)/2;
+        mergeSort(arr,low,mid);
+        mergeSort(arr,mid+1,high);
+        merge(arr,low,mid,high);
+    }
+}
+int main() {
+    vector&lt;int&gt; arr={38,27,43,3,9,82,10};
+    mergeSort(arr,0,arr.size()-1);
+    for(int num:arr) cout&lt;&lt;num&lt;&lt;" ";
+    return 0;
+}</pre>
+        </div>
+        <p class="complexity">复杂度：O(n log n) | 稳定 | 非原地排序 | 空间复杂度O(n)</p>
+    </div>
+    <h3>2. 查找/动态规划/递归</h3>
+    <div class="module-item">
+        <h4>二分查找 + 动态规划（0-1背包） + 递归</h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+int binarySearch(vector&lt;int&gt;&amp; arr,int target) {
+    int left=0,right=arr.size()-1;
+    while(left&lt;=right) {
+        int mid=left+(right-left)/2;
+        if(arr[mid]==target) return mid;
+        else if(arr[mid]&lt;target) left=mid+1;
+        else right=mid-1;
+    }
+    return -1;
+}
+int knapsack(vector&lt;int&gt;&amp; weights,vector&lt;int&gt;&amp; values,int capacity) {
+    int n=weights.size();
+    vector&lt;vector&lt;int&gt;&gt; dp(n+1,vector&lt;int&gt;(capacity+1,0));
+    for(int i=1;i&lt;=n;i++) {
+        for(int j=1;j&lt;=capacity;j++) {
+            if(j&gt;=weights[i-1]) {
+                dp[i][j]=max(dp[i-1][j],dp[i-1][j-weights[i-1]]+values[i-1]);
+            } else {
+                dp[i][j]=dp[i-1][j];
+            }
+        }
+    }
+    return dp[n][capacity];
+}
+int fibRecursion(int n) {
+    if(n&lt;=1) return n;
+    return fibRecursion(n-1)+fibRecursion(n-2);
+}
+int main() {
+    vector&lt;int&gt; arr={1,3,5,7,9,11,13};
+    cout&lt;&lt;binarySearch(arr,7)&lt;&lt;endl;
+    vector&lt;int&gt; weights={2,3,4,5};
+    vector&lt;int&gt; values={3,4,5,6};
+    cout&lt;&lt;knapsack(weights,values,8)&lt;&lt;endl;
+    cout&lt;&lt;fibRecursion(10)&lt;&lt;endl;
+    return 0;
+}</pre>
+        </div>
+    </div>
+    <h3>3. 图算法（DFS/BFS）</h3>
+    <div class="module-item">
+        <h4>邻接矩阵 + 深度优先/广度优先搜索</h4>
+        <div class="code-block">
+<pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+using namespace std;
+class Graph {
+private:
+    int n;
+    vector&lt;vector&lt;int&gt;&gt; adj;
+public:
+    Graph(int num):n(num),adj(num,vector&lt;int&gt;(num,0)){}
+    void addEdge(int u,int v) {
+        adj[u][v]=1;
+        adj[v][u]=1;
+    }
+    void dfs(int u,vector&lt;bool&gt;&amp; visited) {
+        visited[u]=true;
+        cout&lt;&lt;u&lt;&lt;" ";
+        for(int v=0;v&lt;n;v++) {
+            if(adj[u][v]==1&amp;&amp;!visited[v]) {
+                dfs(v,visited);
+            }
+        }
+    }
+    void bfs(int start) {
+        vector&lt;bool&gt; visited(n,false);
+        queue&lt;int&gt; q;
+        q.push(start);
+        visited[start]=true;
+        while(!q.empty()) {
+            int u=q.front();
+            q.pop();
+            cout&lt;&lt;u&lt;&lt;" ";
+            for(int v=0;v&lt;n;v++) {
+                if(adj[u][v]==1&amp;&amp;!visited[v]) {
+                    q.push(v);
+                    visited[v]=true;
+                }
+            }
+        }
+    }
+};
+int main() {
+    Graph g(5);
+    g.addEdge(0,1);g.addEdge(0,2);
+    g.addEdge(1,3);g.addEdge(2,4);
+    cout&lt;&lt;"DFS: ";
+    vector&lt;bool&gt; visited(5,false);
+    g.dfs(0,visited);
+    cout&lt;&lt;"\nBFS: ";
+    g.bfs(0);
+    return 0;
+}</pre>
+        </div>
+    </div>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Eason.Zhao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/02/06/%E4%BB%BB%E5%8A%A1%E4%B8%89-C++%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">http://example.com/2026/02/06/%E4%BB%BB%E5%8A%A1%E4%B8%89-C++%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C++</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/STL/">STL</a><a class="post-meta__tags" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a><a class="post-meta__tags" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a><a class="post-meta__tags" href="/tags/%E5%9B%BE%E7%AE%97%E6%B3%95/">图算法</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/02/05/%E4%BB%BB%E5%8A%A1%E4%BA%8C-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="任务二：个人博客的搭建"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">任务二：个人博客的搭建</div></div><div class="info-2"><div class="info-item-1">  .task-card {   background: rgba(255,255,255,0.95);   border-radius: 16px;   padding: 24px;   margin: 24px 0;   box-shadow: 0 8px 24px rgba(0,0,0,.1); }  .task-title {   font-size: 26px;   font-weight: bold;   margin-bottom: 12px; }  .task-step {   background: linear-gradient(135deg,#667eea,#764ba2);   color: #fff;   padding: 12px 18px;   border-radius: 10px;   margin: 18px 0 10px;   font-weight: bold; }  .task-tip {   background: #f6f8fa;   border-left: 5px solid #667eea;   padding: 12px;  ...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Eason.Zhao</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">📚 C++ 数据结构与算法完整笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">一、STL容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 序列式容器（线性结构）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">vector（动态数组） 连续存储 | 随机访问O(1) | 自动扩容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">list（双向链表） 非连续存储 | 双向遍历 | 头尾增删O(1)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">stack&#x2F;queue&#x2F;deque 栈：后进先出 | 队列：先进先出 | 双端队列：头尾高效</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 关联式容器（非线性结构）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">set&#x2F;map（红黑树） 自动排序 | 增删查O(log n) | 键唯一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">unordered_set&#x2F;unordered_map（哈希表） 无序 | 增删查O(1)平均 | 效率更高</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">priority_queue（优先队列&#x2F;堆） 堆实现 | 默认大顶堆 | 顶元素访问O(1)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">二、数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 线性结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">单链表 遍历&#x2F;插入&#x2F;删除 | 动态内存管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">栈&#x2F;队列（数组实现） 栈：后进先出 | 队列：循环数组避免假溢出</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 非线性结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">二叉搜索树 插入&#x2F;查找&#x2F;中序遍历 | 升序输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">堆 &amp; 哈希表 堆排序 | 哈希表链地址法解决冲突</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">三、算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 排序算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">快速排序 分治 | 原地排序 | 效率高</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">归并排序 分治 | 稳定 | 非原地</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 查找&#x2F;动态规划&#x2F;递归</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">二分查找 + 动态规划（0-1背包） + 递归</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. 图算法（DFS&#x2F;BFS）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">邻接矩阵 + 深度优先&#x2F;广度优先搜索</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/06/%E4%BB%BB%E5%8A%A1%E4%B8%89-C++%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" title="C++ 数据结构与算法笔记">C++ 数据结构与算法笔记</a><time datetime="2026-02-05T16:00:00.000Z" title="Created 2026-02-06 00:00:00">2026-02-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/05/%E4%BB%BB%E5%8A%A1%E4%BA%8C-%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="任务二：个人博客的搭建">任务二：个人博客的搭建</a><time datetime="2026-02-04T16:00:00.000Z" title="Created 2026-02-05 00:00:00">2026-02-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/hello-world/" title="Hello World">Hello World</a><time datetime="2026-01-23T15:23:40.440Z" title="Created 2026-01-23 23:23:40">2026-01-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/23/%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%9A%E5%9F%BA%E4%BA%8EYOLOv11%E7%9A%84%E7%94%B5%E5%AD%90%E8%AE%BE%E5%A4%87%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B-1/" title="任务一：基于YOLOv11的电子设备目标检测">任务一：基于YOLOv11的电子设备目标检测</a><time datetime="2026-01-22T16:00:00.000Z" title="Created 2026-01-23 00:00:00">2026-01-23</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Eason.Zhao</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
